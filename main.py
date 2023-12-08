@@ -5,11 +5,16 @@ import steam.guard
 import gui
 import asyncio
 import pyautogui
+import keyboard
+import configparser
 
-STEAMPATH: str = ""  # write path steam.exe
-MAFILESPATH: str = ""  # write path sda/mafiles folder
-WIDTH: int = 400  # set the window width
-HEIGHT: int = 300  # set the window height
+config = configparser.ConfigParser()
+config.read("./config.cfg")
+
+STEAMPATH: str = config.get("Paths", "STEAMPATH")
+MAFILESPATH: str = config.get("Paths", "MAFILESPATH")
+WIDTH: int = config.getint("Dimensions", "WIDTH")
+HEIGHT: int = config.getint("Dimensions", "HEIGHT")
 
 
 class Pos:
@@ -128,12 +133,9 @@ async def runAccount(
         "-y",
         str(position.y),
     )
-
-    # print("sleep 30") #
-    time.sleep(30)
+    keyboard.wait("Ctrl + Shift + P")
     tfa(sa)
-    # print("sleep 60") #
-    time.sleep(60)
+    keyboard.wait("Ctrl + Shift + P")
 
 
 def startAccounts(accounts: dict, mafiles: dict):
