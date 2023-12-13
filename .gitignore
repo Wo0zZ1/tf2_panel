@@ -1,3 +1,5 @@
-logpass.txt
 temp.json
+data/api.txt
+data/logpass.txt
+guards/
 __pycache__/
